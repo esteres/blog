@@ -2,13 +2,28 @@
 
 <p>
   <strong>Username:</strong>
-  <%= @user %>
+  <%= @user.username %>
 </p>
 
 <p>
   <strong>Email:</strong>
-  <%= @user.email %>
+  <%= @user.email_preview %>
 </p>
 
+<div class="posts">
+  <% if @user.posts.any? %>
+    <% @user.posts.each do |post| %>
+      <div class="post">
+        <h3><%= post.title %></h3>
+        <p><%= post.body_preview %></p>
+        <p>By: <%= @user.username %></p>
+      </div>
+    <% end %>
+  <% else %>
+    <h3>No Posts</h3>
+  <% end %>
+</div>
+
 <%= link_to 'Edit', edit_user_path(@user) %> |
+
 <%= link_to 'Back', users_path %>
